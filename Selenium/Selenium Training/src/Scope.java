@@ -16,7 +16,7 @@ public class Scope {
 		//1.Give the counts of links
 		//2.Count of footer section
 		
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\AS097887\\OneDrive - Cerner Corporation\\Desktop\\chromedriver-win64\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver-win64\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		
 		driver.get("http://qaclickacademy.com/practice.php");
