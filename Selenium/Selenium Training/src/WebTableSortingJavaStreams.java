@@ -35,15 +35,26 @@ public class WebTableSortingJavaStreams {
 		
 		//Scan the name column with getText -> Rice -> print the price of Rice
 		
-		List<String> price = elementsList.stream().filter(s -> s.getText().contains("Beans")).map(s -> getPriceVeggie(s)).collect(Collectors.toList());
+		List<String> price;
 		
-		price.forEach(a -> System.out.println(a));
+		//Pagination
+		
+		do {
+			List <WebElement> rows = driver.findElements(By.xpath("//tbody/tr/td[1]"));
+			price = rows.stream().filter(s -> s.getText().contains("Rice")).map(s -> getPriceVeggie(s)).collect(Collectors.toList());
+			price.forEach(a -> System.out.println(a));
+			if(price.size() < 1) {
+				driver.findElement(By.xpath("//a[@aria-label ='Next']")).click();
+			}
+		}while(price.size() < 1);
+		
+			
 	}
 
 	private static String getPriceVeggie(WebElement s) {
 		// TODO Auto-generated method stub
 		
-		String pricevalue = s.findElement(By.xpath("//tr/td[1]/following::td[1]")).getText();
+		String pricevalue = s.findElement(By.xpath("following::td[1]")).getText();
 		return pricevalue;
 	}
 
