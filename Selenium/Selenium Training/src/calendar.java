@@ -23,27 +23,28 @@ public class calendar {
 		driver.get("https://www.path2usa.com/travel-companion/");
 		driver.manage().window().maximize();
 		
-		//WebElement dateWidget = driver.findElement(By.xpath("//input[@id ='form-field-travel_comp_date']"));
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dateWidget);
+		WebElement dateWidget = driver.findElement(By.xpath("//input[@id ='form-field-travel_comp_date']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dateWidget);
 		
-		//JavascriptExecutor js = (JavascriptExecutor)driver;
-		//js.executeScript("window.scrollBy(0,2000)");
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(0,1000)");
 		
-		//Thread.sleep(5000);
-		//w.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id ='form-field-travel_comp_date']")));
+		Thread.sleep(5000);
+		w.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id ='form-field-travel_comp_date']")));
 		driver.findElement(By.xpath("//input[@id ='form-field-travel_comp_date']")).click();
-		driver.findElement(By.xpath("/html/body/div[10]/div[1]/span[2]/*[name()='svg']")).click();
 		
 		List <WebElement> date = driver.findElements(By.cssSelector(".flatpickr-day "));
 		int count = driver.findElements(By.cssSelector(".flatpickr-day ")).size();
 		
-//		for(int i=0;i<count;i++) {
-//			String day = driver.findElement(By.cssSelector(".flatpickr-day ")).getText();
-//			if(day.equalsIgnoreCase("20")) {
-//				driver.findElements(By.cssSelector(".flatpickr-day ")).get(i).click();
-//				break;
-//			}
-//		}
+		for(int i=0;i<count;i++) {
+			Thread.sleep(2000);
+			w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".flatpickr-day ")));
+			String day = driver.findElement(By.cssSelector(".flatpickr-day ")).getText();
+			if(day.equalsIgnoreCase("27")) {
+				driver.findElements(By.cssSelector(".flatpickr-day ")).get(i).click();
+				break;
+			}
+		}
 	}
 
 }
