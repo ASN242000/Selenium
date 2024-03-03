@@ -87,6 +87,25 @@ public class Locators {
 		Assert.assertFalse(checkbox2.isSelected());
 	}
 	
+	@Test
+	void testByXPathBasic() {
+		driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+		WebElement hidden = driver.findElement(By.xpath("//input[@type = 'hidden']"));
+		Assert.assertFalse(hidden.isDisplayed());
+	}
+	
+	@Test
+	void testByXPathAdvanced() {
+		driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+		WebElement radio1 = driver.findElement(By.xpath("//*[@type = 'radio' and @checked]"));
+		Assert.assertTrue(radio1.getAttribute("id").equals("my-radio-1"));
+		Assert.assertTrue(radio1.isSelected());
+		
+		WebElement radio2 = driver.findElement(By.xpath("//*[@type = 'radio' and not(@checked)]"));
+		Assert.assertTrue(radio2.getAttribute("id").equals("my-radio-2"));
+		Assert.assertFalse(radio2.isSelected());
+	}
+	
 	@AfterTest
 	void tearDown() {
 		driver.quit();
